@@ -41,7 +41,7 @@ A API está disponível em [https://a-pi-codigo-certo.vercel.app/](https://a-pi-
     }
     ```
 
-- **POST /api/login**
+- **POST /api/user/login**
   - **Descrição**: Autentica um usuário e retorna um token JWT.
   - **Body**: 
     ```json
