@@ -1,5 +1,5 @@
 const User = require("../models/model")
-const connectDB = require("../datebase/db")
+const connectDB = require("../datebase/db.js")
 exports.register = async (req, res) => {
     try {
         const {senha, email, nome} = req.body;
@@ -35,20 +35,20 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        const {senha, email} = req.body;
+        const { senha, email } = req.body;
 
-        const db = await connectDB();
-        const coleçao = db.collection('users');
-
-        const usuario = await collection.findOne({email});
-
-        if(usuario) {
-            res.status(200).json(user);
+        const usuario = await User.findOne({ email });
+        
+        if (usuario) {
+            if (usuario.senha === senha) {
+                res.status(200).json({ message: "Login bem-sucedido" });
+            } else {
+                res.status(400).json({ message: "Senha incorreta" });
+            }
         } else {
-            res.status(500).json({"error": "usuario não encontrado"});
+            res.status(404).json({ error: "Usuário não encontrado" });
         }
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 };
-
