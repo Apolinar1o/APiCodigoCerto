@@ -1,5 +1,4 @@
-const User = require("../models/model")
-const connectDB = require("../datebase/db.js")
+const User = require("../models/userModel")
 exports.register = async (req, res) => {
     try {
         const {senha, email, nome} = req.body;
@@ -38,7 +37,7 @@ exports.login = async (req, res) => {
         const { senha, email } = req.body;
 
         const usuario = await User.findOne({ email });
-        
+
         if (usuario) {
             if (usuario.senha === senha) {
                 res.status(200).json({ message: "Login bem-sucedido" });

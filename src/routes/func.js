@@ -3,7 +3,6 @@ const router = express.Router();
 
 const funcController = require("../controller/funcController");
 
-router.get("/", funcController.CreateUser);
-router.post("/", funcController.CreateUser);
+router.post("/", funcController.CreateTask);
 
 module.exports = router;
