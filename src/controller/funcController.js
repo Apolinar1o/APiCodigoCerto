@@ -58,17 +58,18 @@ exports.ListTask = async  (req, res) => {
 
 
 exports.atualizarTask = async  (req, res) => {
+    
     const {taskId, prazo, titulo, desc} = req.body;
 
     if(!taskId) {
         return res.status(500).json({"error": "Id não informado corretamente"});  
     }
     try {
-        const list = await Func.findOne({_id: taskId});
+        //const list = await Func.findOne({_id: taskId});
 
-        const att = Func.findByIdAndUpdate()
+        const att = await Func.findByIdAndUpdate(taskId, {prazo, titulo, "descricao": desc})
 
-        return  res.status(200).json({ message: "Tarefa apagada com sucesso com sucesso!!!" });
+        return  res.status(200).json({ message: "Tarefa atualizada com sucesso com sucesso!!!" });
     } catch (error) {
         return res.status(500).json({"error": error.message});  
     }
