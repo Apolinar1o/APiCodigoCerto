@@ -13,7 +13,11 @@ const FuncSchema = new mongoose.Schema({
     prazo: {
         type: String,
         required: true
+    },
+    userId: {
+        type: String,
+        required: false
     }
 })
 
-module.exports = mongoose.model("function", FuncSchema);
+module.exports = mongoose.model("tasks", FuncSchema);
