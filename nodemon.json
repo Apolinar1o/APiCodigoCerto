@@ -1,5 +1,0 @@
-{
-    "execmap": {
-        "js": "sucrase-node"
-    }
-}
