@@ -1,4 +1,7 @@
-const User = require("../models/userModel")
+require('dotenv').config();
+const User = require("../models/userModel");
+const secret = process.env.SECRET;
+const jtw = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
     try {
@@ -38,10 +41,15 @@ exports.login = async (req, res) => {
         const { senha, email } = req.body;
 
         const usuario = await User.findOne({ email });
+        const id = usuario._id ;
+
 
         if (usuario) {
             if (usuario.senha === senha) {
-                res.status(200).json({ message: "Login bem-sucedido" });
+                const token = jtw.sign({id}, secret, {
+                    expiresIn: 300
+                })
+                res.status(200).json({ message: "Login bem-sucedido", token });
             } else {
                 res.status(400).json({ message: "Senha incorreta" });
             }
